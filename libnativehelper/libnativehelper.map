@@ -1,0 +1,6 @@
+LIBNATIVEHELPER_1 {
+    global:
+        jniThrowException;
+    local:
+        *;
+};
