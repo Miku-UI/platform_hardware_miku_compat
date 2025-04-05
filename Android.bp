@@ -626,7 +626,7 @@ cc_library_shared {
     vendor_available: true,
 }
 
-cc_defaults {
+cc_library_shared {
     name: "libwfdservice_shim",
     shared_libs: [
         "android.media.audio.common.types-V4-cpp",
@@ -637,18 +637,6 @@ cc_defaults {
     ],
     srcs: ["libwfdservice/libwfdservice_shim.cpp"],
     system_ext_specific: true,
-}
-
-cc_library_shared {
-    name: "libwfdservice_shim_v1",
-    defaults: ["libwfdservice_shim"],
-    cflags: ["-DV1"],
-}
-
-cc_library_shared {
-    name: "libwfdservice_shim_v2",
-    defaults: ["libwfdservice_shim"],
-    cflags: ["-DV2"],
 }
 
 cc_library {
