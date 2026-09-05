@@ -9,11 +9,7 @@ TOP = f"{SCRIPT_DIR}/../../../.."
 PATCHELF_PATH = f"{TOP}/prebuilts/extract-tools/linux-x86/bin/patchelf-0_9"
 
 for vndk_version, libs in {
-    "v30": [
-        "libui",
-    ],
     "v32": [
-        "libbinder",
         "libhidlbase",
         "libutils",
     ],
@@ -26,6 +22,7 @@ for vndk_version, libs in {
     "v34": [
         "libaudioroute",
         "libtinyxml2",
+        "libui",
     ],
 }.items():
     for lib in libs:
@@ -57,6 +54,17 @@ for vndk_version, libs in {
                                 PATCHELF_PATH,
                                 "--add-needed",
                                 "libprocessgroup_shim.so",
+                                lib_dest,
+                            ]
+                        )
+
+                    if vndk_version == "v34" and lib == "libui":
+                        subprocess.run(
+                            [
+                                PATCHELF_PATH,
+                                "--replace-needed",
+                                "android.hardware.graphics.common-V4-ndk.so",
+                                "android.hardware.graphics.common-V7-ndk.so",
                                 lib_dest,
                             ]
                         )
